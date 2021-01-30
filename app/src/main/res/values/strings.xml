@@ -1,0 +1,6 @@
+<!--点击Open editor按钮使用多国语言-->
+
+<resources>
+    <string name="app_name">MyJetpackDemo</string>
+    <string name="xinghao">*</string>
+</resources>

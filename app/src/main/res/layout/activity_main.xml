@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+    dataBinding的使用
+        1.凡是让dataBinding 来管理的都需要加入
+        <layout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools">
+
+            <data>
+
+            </data>
+
+            你的布局代码写在这里
+
+         </layout>
+-->
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- 数据关联区域 -->
+    <data>
+        <!--MainData：代表MainViewModel-->
+        <variable
+            name="MainData"
+            type="com.ouwenbin.myjetpackdemo.viewModel.MainViewModel" /> <!-- 指定绑定那个ViewModel 原理：反射-->
+    </data>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+        <TextView
+            android:text="传统的写法:"
+            android:textSize="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv_num"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:text="0" />
+
+        <Button
+            android:id="@+id/btn_jia"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+1" />
+
+        <TextView
+            android:layout_marginTop="30dp"
+            android:text="Jetpack改造后的写法:"
+            android:textSize="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="20dp"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:text="@{MainData.num}" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="30"
+                android:onClick="@{()->MainData.appendNumber(String.valueOf(30))}"
+                />
+
+            <Button
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="*"
+                android:onClick="@{()->MainData.appendNumber(@string/xinghao)}"
+                />
+
+            <Button
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+1"
+                android:onClick="@{()->MainData.Jia()}"
+                />
+            <Button
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-1"
+                android:onClick="@{()->MainData.jian()}"
+                />
+            <Button
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="清除"
+                android:onClick="@{()->MainData.clear()}"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>
